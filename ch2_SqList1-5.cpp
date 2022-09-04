@@ -185,5 +185,113 @@ bool DeletST(SqList &L,Elemtype s,Elemtype t)
 }
 
 
-	/*06 删除顺序表中st之间的数*/
+	/*06 删除有序顺序表重复的数*/
 /*————————————————————————————————————*/	
+bool Deletesame(SqLsit&L)
+{
+	int k;
+	for(int i=0;i<L.length;i++)
+	{
+		k=0;
+		//k 重复的个数
+		for(int j=i;j<L.length;j++)
+		{
+			if(L.data[j]==L.data[i])k++;
+			else{
+				L.data[j-k]=L,data[j];
+			}
+		}
+		L.length-=k;
+	
+		k=0;
+	}
+}
+            /*07 合并两个有序顺序表*/
+/*————————————————————————————————————*/	
+bool Merge(Sqlist &l1,SqList&l2, SqList&L3)
+{
+	int i=0,j=0;
+	//按照大小排入，直到一个表为空
+	for(;i<l1.length&&j<l2.length;)
+	{
+		if(l1.data[i]<=l2.data[j])
+		{
+			L3.data[length]=l1.data[i];
+			i++;
+		}
+		else
+		{
+			L3.data[length]=l2.data[j];
+			j++;
+		}
+		length++;
+	}
+	//将剩余的直接排入
+	if(i==L1.length)
+	{
+		for(;j<L2.length;j++,l3.length++)
+		L3.data[length]=l2.data[j];
+		
+	}
+	if(j==L2.length)
+	{
+		for(;i<L1.length;i++,l3.length++)
+		L3.data[length]=l1.data[j];
+		
+	}
+	
+	return true;
+}
+
+
+            /*08 a[m]b[n]-->b[n]a[m]*/
+/*————————————————————————————————————*/
+void change(SqList&L,int m, int n)
+{
+	Elemtype m; 
+	for(int i=m-1;i>=0;i--)
+	{
+		//a[m]从a的最后一个数字开始往后交换移动，一直移动到最终属于的位置上
+		for(int j=i;j<=n+i;j++)
+		{
+			m=L.data[j];
+			L.data[j]=L.data[j+1]
+			L.data[j]=m;
+		}
+	}
+}
+		
+
+       /*09 有序顺序表找x,与其后继交换 若无则插入 需时间最少*/
+/*————————————————————————————————————————————————————————*/
+void change(SqList&L,Elemtype x)
+{
+	//二分法
+	int head=0,tail=L.length-1;
+	for(;head<tail;)
+	{
+		pivot=(head+tail)/2;
+		
+		iff(L.data[pivot]==x)break;
+		if(L.data[pivot]>x)
+		{
+			tail=pivot-1;
+		}
+		else
+		{
+        		head=pivot+1;
+		}
+		
+	}
+	if(head<=tail)swap(L.data,pivot,pivot+1);
+	else{
+		for(int i=L.length;i>=head;i--)
+		{
+			L.data[i]=L.data[i-1];
+		}
+		L.data[head]=x;
+	}
+
+
+
+
