@@ -138,6 +138,8 @@ void select(SqList&L,Elemtype s,Elemtype t)
 		
 }
 
+	/*04 删除有序表中st之间的数*/
+/*————————————————————————————————————*/	
 bool DeleteST(SqList& L,Elemtype s,Elemtype t)
 {
 	int i,j;
@@ -158,3 +160,30 @@ bool DeleteST(SqList& L,Elemtype s,Elemtype t)
 	}
 	L.length=i;
 	return true;
+}
+
+	/*05 删除顺序表中st之间的数*/
+/*————————————————————————————————————*/	
+bool DeletST(SqList &L,Elemtype s,Elemtype t)
+{
+	//same as question04
+	if(s>t||L.length==0)return false;
+	int k=0;
+	for(int i=0;i<L.length;i++)
+	{
+		if(L.data[i]<s|L.data[i]>t)
+		{
+			L.data[i-k]=L.data[i];
+		}
+		else
+		{
+			k++;
+		}
+	}
+	L.length-=k;
+	return true;
+}
+
+
+	/*06 删除顺序表中st之间的数*/
+/*————————————————————————————————————*/	
