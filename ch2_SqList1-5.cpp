@@ -206,40 +206,58 @@ bool Deletesame(SqLsit&L)
 		k=0;
 	}
 }
+
+bool DeleteSame(SqList&L)
+{
+	//两个下标 i用来指新的不重复列尾部 j用来移动搜索
+	for(int i=0;i<L.length;i++)
+	{
+		for(int j=i+1;j<L.length;j++)
+		{
+			if(L.data[i]!=L.data[j])
+			   {
+				   L.data[++i]=L.data[j];
+			   }
+	        }
+	}
+			  
+	L.length=i+1;
+}
             /*07 合并两个有序顺序表*/
 /*————————————————————————————————————*/	
 bool Merge(Sqlist &l1,SqList&l2, SqList&L3)
 {
 	int i=0,j=0;
+	int length=0;
 	//按照大小排入，直到一个表为空
 	for(;i<l1.length&&j<l2.length;)
 	{
 		if(l1.data[i]<=l2.data[j])
 		{
-			L3.data[length]=l1.data[i];
-			i++;
+			L3.data[length++]=l1.data[i++];
+			
 		}
 		else
 		{
-			L3.data[length]=l2.data[j];
-			j++;
+			L3.data[length++]=l2.data[j++];
+		
 		}
-		length++;
+		
 	}
 	//将剩余的直接排入
 	if(i==L1.length)
 	{
-		for(;j<L2.length;j++,l3.length++)
-		L3.data[length]=l2.data[j];
+		for(;j<L2.length;)
+		L3.data[length++]=l2.data[j++];
 		
 	}
 	if(j==L2.length)
 	{
-		for(;i<L1.length;i++,l3.length++)
-		L3.data[length]=l1.data[j];
+		for(;i<L1.length;)
+		L3.data[length++]=l1.data[j++];
 		
 	}
-	
+	l3.length=length;
 	return true;
 }
 
@@ -261,6 +279,14 @@ void change(SqList&L,int m, int n)
 	}
 }
 		
+void change(SqList&L,int m, int n)
+{
+	//先全部转置 变成倒置的b,a
+	//再分别将,ba 转置
+	reverse(L,0,n+m-1);
+	reverse(L,0,n-1);
+	reverse(L,n,n+m-1);
+}
 
        /*09 有序顺序表找x,与其后继交换 若无则插入 需时间最少*/
 /*————————————————————————————————————————————————————————*/
@@ -283,7 +309,7 @@ void change(SqList&L,Elemtype x)
 		}
 		
 	}
-	if(head<=tail)swap(L.data,pivot,pivot+1);
+	if(L.data[pivot]==x&&pivot!=L.length-1))swap(L.data,pivot,pivot+1);
 	else{
 		for(int i=L.length;i>=head;i--)
 		{
@@ -292,6 +318,41 @@ void change(SqList&L,Elemtype x)
 		L.data[head]=x;
 	}
 
-
-
+}
+   /*10 数组R[n]循环左移p,0 <p<n */
+/*————————————————————————————————————————————————————————*/
+/* 算法思路 ：  
+    从第p+1个数开始，到末尾最后一个数，所有数字都往依次左移动p个位置
+    时间复杂度：n^2
+    空间复杂度：
+*/
+void Leftmove(SqList &L,int p)
+{ 
+	for(int i=p;i<L.length;i++)
+	{
+	
+		for(int j=p-1;j>=0;j--)
+		{
+			m=L.data[i];
+			L.data[i]=L.data[j];
+			L.data[j]=m;
+		}
+		
+	}
+}
+/*方法二： 
+利用转置 1转置全列 2，分别转置0-(n-p-1),(n-p,n-1)
+时间复杂度 ：n
+空间复杂度： n
+*/
+void leftmove2(ElemType & R[],int p,int n)
+{
+	//先全部转置 变成倒置的b,a
+	//再分别将,ba 转置
+	reverse(R,0,n-1);
+	reverse(R,0,n-p-1);
+	reverse(R,n-p,n-1);
+}
+		
+		
 
