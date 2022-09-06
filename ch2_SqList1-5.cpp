@@ -353,6 +353,242 @@ void leftmove2(ElemType & R[],int p,int n)
 	reverse(R,0,n-p-1);
 	reverse(R,n-p,n-1);
 }
-		
-		
+             /*11 找出两个升序数组的中位数 */
+/*————————————————————————————————————————————————————————*/
+/* 算法思路 ：  
+    方法1 将两个数组合并 再按下标取中位数 T=n K=n
+    方法2 两个指针 指向第一个数字 比较两个被指向的数的大小，若数字较小 则指针往后移 同时计数，一直到[L/2]处
+    时间复杂度：n
+    空间复杂度：1
+*/	
 
+void TwoListMid(Elemtype s2[],Elemtype s2[],int l1,int l2, ElemType & mid)
+{
+	int i,j,k=-1;
+	for(i=0;j=0;i<l1&&j<l2&&k<((l1+l2)/2);)
+	{
+		if(k==(l1+l2)/2)-1) //下一个就是中位数
+		{
+		   if(s1[i]>=s2[j])mid=s2[j];
+		   else mid=s1[i];
+		   k++;
+		}
+		else
+		{
+			if(s1[i]>s2[j++])k++;
+		        if(s1[i++]<s2[j])k++;
+		        if(s1[i++]==s2[j++])k+=2;
+		}
+	}
+}
+/*方法3 A中位数 a B中位数b 
+      a>b 舍弃A中较大 b中较小的 每次舍弃的AB部分都等长
+      a<b 舍弃A中较小 B中较大序列
+      a=b 即为所求中位数
+      重复至AB只剩下一个数字 较小者为中位数
+ */
+int Merge_search(int A[],int B[],n)
+{
+	int s1=0,d1=n-1,s2=0,d2=n-1;
+	while(s1!=d1||s2!=d2)
+	{
+		m1=(s1+d1)/2;
+		m2=(s1+d2)/2;
+		if(A[m1]==B[m2])
+			return A[m1];
+		if(A[m1]<B[m2])
+		{
+			if((s1+d1)%2==0)//奇数个点
+			{
+				s1=m1;
+				d2=m2;
+			}
+			else
+			{
+		               s1=m1+1;
+				d2=m2;
+			}
+		}
+		else{
+			
+			if((s1+d1)%2==0)//奇数个点
+			{
+				s2=m2;
+				d=m1;
+			}
+			else
+			{
+		               s2=m2+1;
+				d1=m;
+			}
+		}
+		
+		
+	}
+	return A[s1]<B[s2]?A[s1]:B[s2];
+}
+               /*12 找出数组中的主元素 */
+/*————————————————————————————————————————————————————————*/
+/* 算法思路 ：  
+    方法  先进行升序排序 统计每一个数字的出现频率 若后一个大 则以此为标准 找到最大频率的数字 和尾部的最后一个数字的+1 比较 
+    时间复杂度：n^2
+    空间复杂度：1
+*/	
+void liftSort(ElemType & a[],int length)
+{
+	
+}
+int MaxFrequency(ElemType a[],int length,int mainnum)
+{
+	
+}
+void main_num(ElemType a[],int length)
+{
+	LiftSort( a,length);
+	int mainnum;
+	m=MaxFrequency(a,length,mainnum);
+	if(m>(a[length-1]+1)/2)
+	{
+		cout<<mainnum<<endl;
+	}
+	else cout<<-1<<endl;
+	
+}
+
+/*
+方法2:
+从前往后扫描：，将第一个遇到的数字保存在c中，遇到一次计数+1，若遇到一次不是则-1，计数器为0时开始新一轮技术。
+统计C数字出现次数 判断与n/2大小
+*/
+int Majority(int A[],int n)
+{
+	int i,c,count=1;
+	c=A[0];
+	for(i=1;i<n;i++)
+	{
+		if(A[i]==c)
+		count++;
+		else
+		{
+			if(count>0)count--;
+			else
+			{
+				c=A[i];
+				count==1;
+			}
+		}
+	}
+	if(count>0)
+	{
+		for(i=count=0;i<n;i++)
+		{
+			if(A[i]==c)count++;
+		}
+		if(count>n/2)return c;
+		else return -1;
+	}
+}
+
+		}
+	}
+	
+}
+
+           /*13 找出数组中的未出现的最小正整数 */
+/*————————————————————————————————————————————————————————*/
+/* 算法思路 ：  
+    方法  c=1，若遇到1，则c++,再次遍历寻找与C相同的值，循环操作，知道找不到C的值时跳出，此时c为期最小正整数
+    时间复杂度：n^2
+    空间复杂度：1
+*/	
+void MinList(int A[],int n)
+{
+	int c=1,count=0;
+	for(;;c++)
+	{
+		count=0;
+		for(int i=0;i<n&&count==0;i++)
+		{
+			if(A[i]==c)count=1;
+		}
+		if(count==0)break;
+	}
+	return c;
+}
+  /*14 三元祖距离最小 */
+/*————————————————————————————————————————————————————————*/
+/* 算法思路 ：  
+    选定一个a,在s2里找与a差值最小的b,再找s3中与b差值最小的c1,与a差值最小的c2,最后比较出距离最小的。
+    便利计算所有的a,找出距离最小的三元组。
+    时间复杂度：n^2
+    空间复杂度：1
+*/	
+	
+int Distance(int a, int b, int c)
+{
+	return int(abs(a-b)+abs(b-c)+abs(a-c));
+}
+		
+void (int s1[],int s2[],int s3[],int n1, int n2, int n3)
+{
+	int dist=10000;
+	int a_tmp,b_tmp,c_tmp;
+	for(int i;i<n1;i++)
+	{
+		int a=s1[i];
+		int b=0;
+		int c=0;c1=0;c2=0;
+		int D_ab=abs(a-s2[0]);
+		int D_ac=abs(a-s3[0]);
+		for(int j=0;j<n2;j++)
+		{
+			//在s2里找与a差值最小的b
+			if(abs(a-s2[j])<D_ab)
+			{
+				b=s2[j];
+				D_ab=abs(a-s2[j];
+			}	
+		}
+		for(int j=0;j<n3;j++)
+		{
+			//与a差值最小的c1,
+			if(abs(a-s3[j])<D_ab)
+			{
+				c1=s3[j];
+				D_ac=abs(a-s3[j];
+			}	
+		}
+		D_bc=abs(b-s3[0]);
+		for(int j=0;j<n3;j++)
+		{
+			//再找s3中与b差值最小的c2,
+			if(abs(b-s3[j])<D_ab)
+			{
+				c2=s3[j];
+				D_bc=abs(b-s3[j];
+			}	
+		}
+		if(Distance(a,b,c1)>Distance(a,b,c2)) c=c2
+	        else c=c1;
+	       if(dist>Distance(a,b,c))
+               { a_tmp=a;
+		b_tmp=b;c_tmp=c;			 
+	       }
+					
+	}
+					 
+					 
+}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+}
