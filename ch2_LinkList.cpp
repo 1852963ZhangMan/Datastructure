@@ -92,14 +92,88 @@ void delete_node_after_p(LinkList &L,LinkNode *p)
  }
      /*05题目：带头节点单链表L就地逆置 空间复杂o1*/
 /*—————————————————————————————————————————*/  
+  void reverse(LinkList &L)
+  {
+    // p->q->tmp
+    LNode*p,*q,*tmp;
+    p=L->next;
+    q=p->next;
+    while(q->next!=NULL)
+     {
+        tmp=q->next;//暂存q的后继
+        q->next=p;//p<--q
+        p=q;
+        q=tmp;//向后移动
+ 
+    }
+    q->next=p;
+    L->next=q;//L指向末端第一个节点
+   
+  }
   
+      /*06题目：带头节点单链表L 递增有序*/
+/*—————————————————————————————————————————*/ 
   
+void Sort(LinkList &L)
+{
+  LNode *p=L->next,*q;
+  while(p!=NULL)
+  {
+    q=p->next;
+    while(q!=NULL)
+    {
+      if(p->data>q->data)
+      {
+        tmp=p->data;
+        p->data=q->data;
+        q->data=tmp;
+      }
+      q=q->next;
+    }
+    p=p->next;
+  }
+}
   
-  
-  
-  
-  
-  
+   /*07题目：带头节点单链表L 无序 删除值在mn之间的*/
+/*—————————————————————————————————————————*/  
+  void delete(LinkList&L ,ElemType m,ElemType n)
+  {
+    LNode*p;
+    p=L; //p指向被检测的节点的前驱
+    while(p->next!=NULL)
+    {
+      if(p->next->data>m&&p->next->data<n)
+      {
+        q=p->next;
+        p->next=p->next->next;
+        free(q);
+      }
+      else
+      {
+        p=p->next;
+      }
+    }
+  }
+  /*08题目：找出两个单链表的公共节点*/
+/*—————————————————————————————————————————*/ 
+void mutualNode(LinkList &L1,LinkList&L2)
+{
+  LNode *p=L1->next;
+  while(p!=NULL)
+  {
+    q=L2->next;
+    while(q!=NULL)
+    {
+      if(p->data==q->data)
+      {
+        cout<<p->data<<endl;
+      }
+      q=q->next;
+    }
+    p=p->next;
+  }
+}
+
   
   
   
